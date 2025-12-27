@@ -81,6 +81,7 @@ Professional PDF and JSON exports for records and CA consultation
 
 Built with modern web technologies and a clean dashboard, TaxCortex is scalable, extensible, and suitable for both real-world deployment and enterprise-grade financial systems.
 <h3 align="center">EXPECTED OUTPUT</h3>
+
 ![WhatsApp Image 2025-12-26 at 21 22 25](https://github.com/user-attachments/assets/3e9c299c-970a-4e7f-a265-b8487625a193)
 
 <h2 align="center">TECHNOLOGY STACK</h2>
