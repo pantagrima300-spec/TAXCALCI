@@ -1,9 +1,12 @@
-<img src="https://instasize.com/p/1e4d272918260bae17ff0c7ff3dddaf452de033aa6da24bff6c25ecdc9fec84c.png" alt="" align="center" width="225" height="150"><h1 align="center">TAX CORTEX</h1>
+<![PHOTO-2025-12-27-14-58-35](https://github.com/user-attachments/assets/d6da887c-e4ac-4ce4-b3c0-7a41b5fb3a76)
+<h1 align="center">TAX CORTEX</h1>
 <p align="center"><a href="#project-description">Project Description</a> - <a href="#key-features">Key Features</a> - <a href="#technology-stack">Tech Stack</a></p>
 
 <img src="https://ik.imagekit.io/o6xywsa3m/PHOTO.png" alt="" align="center" width="auto" height="auto">
 
 ## Project Description
+
+![PHOTO-2025-12-27-15-24-06](https://github.com/user-attachments/assets/2e7d2699-fc12-4ccb-a898-0c4597e58e88)
 
 TaxCortex is a FinTech-based Smart Income Tax Calculation and Planning Platform designed specifically for Indian taxpayers in accordance with the Income Tax Rules for FY 2025–26. The platform addresses one of the most critical yet underserved financial problems in India — accurate, transparent, and optimized income tax planning for individuals and families.
 
@@ -36,6 +39,8 @@ This project is a FinTech Calculation Platform that provides real-time financial
 🔐 Secure Data Handling No financial data stored on server (privacy-first).
 
 ## Tech Stack
+![PHOTO-2025-12-27-12-01-04](https://github.com/user-attachments/assets/9a7d98c5-11f4-4470-a65f-d1dcbf35ac30)
+
 
 TaxCortex is built using a modern, lightweight, and scalable full-stack architecture, ensuring high performance, accuracy, and data privacy.
 
@@ -94,5 +99,7 @@ JSON Standardized data format for exports and API communication.
 ⚙️ Compatibility
 
 Browsers: Chrome, Firefox, Edge, Safari (Desktop & Mobile)
+
+Platforms: Windows, macOS, Linux, Android, iOS
 
 Platforms: Windows, macOS, Linux, Android, iOS
