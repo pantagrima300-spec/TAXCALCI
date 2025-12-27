@@ -1,12 +1,14 @@
-<![PHOTO-2025-12-27-14-58-35](https://github.com/user-attachments/assets/d6da887c-e4ac-4ce4-b3c0-7a41b5fb3a76)
-<h1 align="center">TAX CORTEX</h1>
+
+<![WhatsApp Image 2025-12-26 at 19 57 44](https://github.com/user-attachments/assets/f23cc878-29bf-4ec7-83ee-bc2df210a544)
+h1 align="center">TAX CORTEX</h1>
 <p align="center"><a href="#project-description">Project Description</a> - <a href="#key-features">Key Features</a> - <a href="#technology-stack">Tech Stack</a></p>
 
 <img src="https://ik.imagekit.io/o6xywsa3m/PHOTO.png" alt="" align="center" width="auto" height="auto">
 
 ## Project Description
 
-![PHOTO-2025-12-27-15-24-06](https://github.com/user-attachments/assets/2e7d2699-fc12-4ccb-a898-0c4597e58e88)
+![WhatsApp Image 2025-12-26 at 21 22 25](https://github.com/user-attachments/assets/1cf678dd-6336-4bb9-af9a-d7b13e20e34f)
+
 
 TaxCortex is a FinTech-based Smart Income Tax Calculation and Planning Platform designed specifically for Indian taxpayers in accordance with the Income Tax Rules for FY 2025–26. The platform addresses one of the most critical yet underserved financial problems in India — accurate, transparent, and optimized income tax planning for individuals and families.
 
