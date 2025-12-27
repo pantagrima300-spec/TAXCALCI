@@ -1,5 +1,6 @@
 
 <![WhatsApp Image 2025-12-26 at 19 57 44](https://github.com/user-attachments/assets/f23cc878-29bf-4ec7-83ee-bc2df210a544)
+
 h1 align="center">TAX CORTEX</h1>
 <p align="center"><a href="#project-description">Project Description</a> - <a href="#key-features">Key Features</a> - <a href="#technology-stack">Tech Stack</a></p>
 
