@@ -7,8 +7,9 @@
 <img src="https://ik.imagekit.io/o6xywsa3m/PHOTO.png" alt="" align="center" width="auto" height="auto">
 
 <h2 align="center">PROJECT DESCRIPTION</h2>
-
-![WhatsApp Image 2025-12-26 at 21 22 25](https://github.com/user-attachments/assets/1cf678dd-6336-4bb9-af9a-d7b13e20e34f)
+<h3 align="center">PROJECT DESCRIPTION</h3>
+WIREFRAME
+![WhatsApp Image 2025-12-27 at 18 49 23](https://github.com/user-attachments/assets/e8770929-8779-49db-a09e-9985c0b04a0f)
 
 
 🧾 Platform Overview
@@ -80,6 +81,7 @@ Professional PDF and JSON exports for records and CA consultation
 🚀 Scalability & Deployment
 
 Built with modern web technologies and a clean dashboard, TaxCortex is scalable, extensible, and suitable for both real-world deployment and enterprise-grade financial systems.
+<h3 align="center">EXPECTED OUTPUT</h3>
 <h2 align="center">TECHNOLOGY STACK</h2>
 🌐 Frontend Technologies
 
