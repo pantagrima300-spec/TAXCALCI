@@ -1,0 +1,1537 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TaxCortex - Smart Tax Calculator</title>
+    <style>
+        :root {
+            --primary-blue: #0066cc;
+            --secondary-blue: #0052a3;
+            --light-blue: #e6f2ff;
+            --accent-blue: #1a7fd9;
+            --text-dark: #1a1a2e;
+            --text-light: #666;
+            --bg-white: #ffffff;
+            --bg-light: #f8fafc;
+            --border-color: #e0e8f0;
+            --success: #10b981;
+            --warning: #f59e0b;
+            --error: #ef4444;
+            --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.06);
+            --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.08);
+            --shadow-lg: 0 12px 24px rgba(0, 0, 0, 0.12);
+            --transition: all 0.3s cubic-bezier(0.4, 0.0, 0.2, 1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', sans-serif;
+            background: linear-gradient(135deg, #f8fafc 0%, #e6f2ff 100%);
+            color: var(--text-dark);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        header {
+            background: var(--bg-white);
+            border-bottom: 1px solid var(--border-color);
+            padding: 1.5rem 2rem;
+            box-shadow: var(--shadow-sm);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo-section {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .logo-img {
+            width: 50px;
+            height: 50px;
+            object-fit: contain;
+            animation: slideInDown 0.6s ease-out;
+        }
+
+        .logo-text {
+            font-size: 1.8rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--primary-blue), var(--accent-blue));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            letter-spacing: -0.5px;
+            animation: slideInDown 0.6s ease-out 0.1s backwards;
+        }
+
+        .nav-buttons {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .nav-button {
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: 8px;
+            font-size: 0.95rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .nav-button.active {
+            background: var(--primary-blue);
+            color: white;
+        }
+
+        .nav-button.inactive {
+            color: var(--primary-blue);
+            background: var(--light-blue);
+        }
+
+        .nav-button:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .section {
+            background: var(--bg-white);
+            border-radius: 16px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: var(--shadow-md);
+            border: 1px solid var(--border-color);
+            animation: fadeInUp 0.6s ease-out;
+        }
+
+        .section.hidden {
+            display: none;
+        }
+
+        .section-title {
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+            color: var(--text-dark);
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .section-icon {
+            width: 32px;
+            height: 32px;
+            background: var(--light-blue);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: var(--text-dark);
+            font-size: 0.95rem;
+        }
+
+        input[type="text"],
+        input[type="number"],
+        input[type="date"],
+        select,
+        textarea {
+            width: 100%;
+            padding: 0.875rem;
+            border: 2px solid var(--border-color);
+            border-radius: 8px;
+            font-size: 0.95rem;
+            font-family: inherit;
+            transition: var(--transition);
+            background: var(--bg-white);
+            color: var(--text-dark);
+        }
+
+        input[type="text"]:focus,
+        input[type="number"]:focus,
+        input[type="date"]:focus,
+        select:focus,
+        textarea:focus {
+            outline: none;
+            border-color: var(--primary-blue);
+            box-shadow: 0 0 0 3px rgba(0, 102, 204, 0.1);
+        }
+
+        button {
+            padding: 0.875rem 1.75rem;
+            border: none;
+            border-radius: 8px;
+            font-size: 0.95rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary-blue), var(--accent-blue));
+            color: white;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .btn-secondary {
+            background: var(--light-blue);
+            color: var(--primary-blue);
+            border: 2px solid var(--primary-blue);
+        }
+
+        .btn-secondary:hover {
+            background: var(--primary-blue);
+            color: white;
+            transform: translateY(-3px);
+        }
+
+        .btn-success {
+            background: var(--success);
+            color: white;
+        }
+
+        .btn-success:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .btn-small {
+            padding: 0.5rem 1rem;
+            font-size: 0.85rem;
+        }
+
+        .btn-group {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        .income-source-item {
+            background: var(--bg-light);
+            border: 2px solid var(--border-color);
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            transition: var(--transition);
+        }
+
+        .income-source-item:hover {
+            border-color: var(--primary-blue);
+            box-shadow: var(--shadow-md);
+        }
+
+        .income-item-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .income-item-title {
+            font-weight: 600;
+            color: var(--text-dark);
+        }
+
+        .btn-remove {
+            padding: 0.5rem 1rem;
+            background: var(--error);
+            color: white;
+            border-radius: 6px;
+            border: none;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .btn-remove:hover {
+            background: #c91f1f;
+            transform: scale(1.05);
+        }
+
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .card {
+            background: linear-gradient(135deg, var(--bg-light), var(--light-blue));
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 1.5rem;
+            transition: var(--transition);
+            cursor: pointer;
+        }
+
+        .card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-lg);
+            border-color: var(--primary-blue);
+        }
+
+        .card-icon {
+            width: 48px;
+            height: 48px;
+            background: var(--primary-blue);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: white;
+        }
+
+        .card-title {
+            font-weight: 700;
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+            color: var(--text-dark);
+        }
+
+        .card-value {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--primary-blue);
+            margin-bottom: 0.5rem;
+        }
+
+        .card-subtitle {
+            font-size: 0.85rem;
+            color: var(--text-light);
+        }
+
+        .results-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .result-box {
+            background: white;
+            border: 2px solid var(--border-color);
+            border-radius: 12px;
+            padding: 1.5rem;
+            transition: var(--transition);
+        }
+
+        .result-box.active {
+            border-color: var(--primary-blue);
+            background: var(--light-blue);
+        }
+
+        .result-label {
+            font-size: 0.9rem;
+            color: var(--text-light);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            font-weight: 600;
+        }
+
+        .result-value {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--primary-blue);
+            margin-top: 0.5rem;
+        }
+
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 1.5rem;
+        }
+
+        .comparison-table th {
+            background: linear-gradient(135deg, var(--primary-blue), var(--accent-blue));
+            color: white;
+            padding: 1rem;
+            text-align: left;
+            font-weight: 600;
+            font-size: 0.95rem;
+        }
+
+        .comparison-table td {
+            padding: 1rem;
+            border-bottom: 1px solid var(--border-color);
+            color: var(--text-dark);
+        }
+
+        .comparison-table tr:hover {
+            background: var(--light-blue);
+        }
+
+        .savings-highlight {
+            background: rgba(16, 185, 129, 0.1);
+            color: var(--success);
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            font-weight: 600;
+        }
+
+        .investment-card {
+            background: var(--light-blue);
+            border: 2px solid var(--primary-blue);
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+            transition: var(--transition);
+        }
+
+        .investment-card:hover {
+            box-shadow: var(--shadow-lg);
+            transform: translateX(4px);
+        }
+
+        .investment-title {
+            font-weight: 700;
+            color: var(--primary-blue);
+            margin-bottom: 0.5rem;
+        }
+
+        .investment-limit {
+            font-size: 0.9rem;
+            color: var(--text-light);
+            margin-bottom: 0.75rem;
+        }
+
+        .investment-input {
+            width: 100%;
+            padding: 0.75rem;
+            border: 2px solid var(--primary-blue);
+            border-radius: 6px;
+            margin-bottom: 0.5rem;
+        }
+
+        .tabs {
+            display: flex;
+            gap: 1rem;
+            border-bottom: 2px solid var(--border-color);
+            margin-bottom: 1.5rem;
+            overflow-x: auto;
+        }
+
+        .tab {
+            padding: 1rem 1.5rem;
+            border: none;
+            background: none;
+            cursor: pointer;
+            font-weight: 600;
+            color: var(--text-light);
+            border-bottom: 3px solid transparent;
+            transition: var(--transition);
+            white-space: nowrap;
+        }
+
+        .tab.active {
+            color: var(--primary-blue);
+            border-bottom-color: var(--primary-blue);
+        }
+
+        .tab:hover {
+            color: var(--primary-blue);
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+            animation: fadeInUp 0.4s ease-out;
+        }
+
+        .monthly-tracker {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .month-card {
+            background: var(--light-blue);
+            border: 2px solid var(--border-color);
+            border-radius: 8px;
+            padding: 1rem;
+            text-align: center;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .month-card:hover {
+            border-color: var(--primary-blue);
+            transform: scale(1.05);
+        }
+
+        .month-name {
+            font-weight: 600;
+            font-size: 0.85rem;
+            color: var(--text-dark);
+            margin-bottom: 0.5rem;
+        }
+
+        .month-value {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--primary-blue);
+        }
+
+        .family-member {
+            background: var(--bg-light);
+            border: 2px solid var(--border-color);
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .family-member:hover {
+            border-color: var(--primary-blue);
+        }
+
+        .member-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .member-name {
+            font-weight: 600;
+            font-size: 1.1rem;
+            color: var(--text-dark);
+        }
+
+        .comparison-badge {
+            background: var(--success);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        .summary-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .stat-box {
+            background: linear-gradient(135deg, var(--light-blue), white);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 1.5rem;
+            text-align: center;
+        }
+
+        .stat-label {
+            font-size: 0.85rem;
+            color: var(--text-light);
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-value {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--primary-blue);
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes slideInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 1rem;
+            }
+
+            .section {
+                padding: 1.5rem;
+                margin-bottom: 1.5rem;
+            }
+
+            .header-container {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+
+            .cards-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .results-container {
+                grid-template-columns: 1fr;
+            }
+
+            .comparison-table {
+                font-size: 0.85rem;
+            }
+
+            .comparison-table th,
+            .comparison-table td {
+                padding: 0.75rem;
+            }
+
+            .btn-group {
+                flex-direction: column;
+            }
+
+            button {
+                width: 100%;
+            }
+
+            .tabs {
+                gap: 0.5rem;
+            }
+
+            .tab {
+                padding: 0.75rem 1rem;
+                font-size: 0.9rem;
+            }
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        .kinetic-element {
+            will-change: transform;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-container">
+            <div class="logo-section">
+                <img src="https://agi-prod-file-upload-public-main-use1.s3.amazonaws.com/9d1a589c-7231-4c79-8ac8-28c41ba9a333" alt="TaxCortex Logo" class="logo-img">
+                <div class="logo-text">TaxCortex</div>
+            </div>
+            <div class="nav-buttons">
+                <button class="nav-button active" onclick="showSection('dashboard')">Dashboard</button>
+                <button class="nav-button inactive" onclick="showSection('income')">Income</button>
+                <button class="nav-button inactive" onclick="showSection('regime')">Tax Regime</button>
+                <button class="nav-button inactive" onclick="showSection('investments')">Investments</button>
+                <button class="nav-button inactive" onclick="showSection('family')">Family</button>
+                <button class="nav-button inactive" onclick="showSection('tracking')">Tracking</button>
+            </div>
+        </div>
+    </header>
+
+    <div class="container">
+        <div id="dashboard" class="section kinetic-element">
+            <div class="section-title">
+                <div class="section-icon">📊</div>
+                Tax Overview Dashboard
+            </div>
+
+            <div class="summary-stats">
+                <div class="stat-box">
+                    <div class="stat-label">Total Income</div>
+                    <div class="stat-value" id="totalIncomeDisplay">₹0</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-label">Tax Payable (OPS)</div>
+                    <div class="stat-value" id="opsDisplay">₹0</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-label">Tax Payable (NPS)</div>
+                    <div class="stat-value" id="npsDisplay">₹0</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-label">Maximum Savings</div>
+                    <div class="stat-value" id="maxSavingsDisplay">₹0</div>
+                </div>
+            </div>
+
+            <div class="cards-grid">
+                <div class="card kinetic-element">
+                    <div class="card-icon">💰</div>
+                    <div class="card-title">Annual Income</div>
+                    <div class="card-value" id="annualIncomeCard">₹0</div>
+                    <div class="card-subtitle">Total from all sources</div>
+                </div>
+                <div class="card kinetic-element">
+                    <div class="card-icon">📈</div>
+                    <div class="card-title">Effective Tax Rate (OPS)</div>
+                    <div class="card-value" id="effectiveTaxCard">0%</div>
+                    <div class="card-subtitle">Old Pension Scheme</div>
+                </div>
+                <div class="card kinetic-element">
+                    <div class="card-icon">🎯</div>
+                    <div class="card-title">Recommended Regime</div>
+                    <div class="card-value" id="recommendedRegime">—</div>
+                    <div class="card-subtitle">Based on your profile</div>
+                </div>
+                <div class="card kinetic-element">
+                    <div class="card-icon">✅</div>
+                    <div class="card-title">Investments Utilized</div>
+                    <div class="card-value" id="investmentsUtilized">₹0</div>
+                    <div class="card-subtitle">80C deductions</div>
+                </div>
+            </div>
+
+            <h3 style="margin-top: 2rem; margin-bottom: 1rem; color: var(--text-dark);">Quick Actions</h3>
+            <div class="btn-group">
+                <button class="btn-primary" onclick="showSection('income')">Add Income Sources</button>
+                <button class="btn-primary" onclick="showSection('investments')">Plan Investments</button>
+                <button class="btn-success" onclick="exportJSON()">📥 Export Data</button>
+                <button class="btn-secondary" onclick="resetAll()">Reset All Data</button>
+            </div>
+        </div>
+
+        <div id="income" class="section hidden kinetic-element">
+            <div class="section-title">
+                <div class="section-icon">💵</div>
+                Multiple Income Sources
+            </div>
+
+            <div id="incomeSourcesContainer"></div>
+
+            <button class="btn-primary" onclick="addIncomeSource()">+ Add Income Source</button>
+        </div>
+
+        <div id="regime" class="section hidden kinetic-element">
+            <div class="section-title">
+                <div class="section-icon">⚖️</div>
+                Tax Regime Comparison
+            </div>
+
+            <div class="tabs">
+                <button class="tab active" onclick="switchTab('regimeComparison')">Comparison</button>
+                <button class="tab" onclick="switchTab('regimeDetails')">2024-25 Rates</button>
+            </div>
+
+            <div id="regimeComparison" class="tab-content active">
+                <table class="comparison-table">
+                    <thead>
+                        <tr>
+                            <th>Income Slab</th>
+                            <th>Old Pension Scheme (OPS)</th>
+                            <th>New Pension Scheme (NPS)</th>
+                            <th>Your Tax (OPS)</th>
+                            <th>Your Tax (NPS)</th>
+                        </tr>
+                    </thead>
+                    <tbody id="regimeTableBody">
+                    </tbody>
+                </table>
+
+                <h3 style="margin-top: 2rem; color: var(--text-dark); margin-bottom: 1rem;">Your Calculation</h3>
+                <div class="results-container">
+                    <div class="result-box">
+                        <div class="result-label">Old Pension Scheme</div>
+                        <div class="result-value" id="totalTaxOPS">₹0</div>
+                    </div>
+                    <div class="result-box">
+                        <div class="result-label">New Pension Scheme</div>
+                        <div class="result-value" id="totalTaxNPS">₹0</div>
+                    </div>
+                    <div class="result-box active">
+                        <div class="result-label">Tax Saving</div>
+                        <div class="result-value" id="taxSaving">₹0</div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="regimeDetails" class="tab-content">
+                <h3 style="color: var(--text-dark); margin-bottom: 1rem;">FY 2024-25 Tax Rates</h3>
+                <table class="comparison-table">
+                    <thead>
+                        <tr>
+                            <th>Income Slab</th>
+                            <th>Old Pension Scheme (OPS)</th>
+                            <th>New Pension Scheme (NPS)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Up to ₹3 Lakhs</td>
+                            <td>Nil</td>
+                            <td>Nil</td>
+                        </tr>
+                        <tr>
+                            <td>₹3 - ₹6 Lakhs</td>
+                            <td>5%</td>
+                            <td>5%</td>
+                        </tr>
+                        <tr>
+                            <td>₹6 - ₹9 Lakhs</td>
+                            <td>10%</td>
+                            <td>10%</td>
+                        </tr>
+                        <tr>
+                            <td>₹9 - ₹12 Lakhs</td>
+                            <td>15%</td>
+                            <td>15%</td>
+                        </tr>
+                        <tr>
+                            <td>₹12 - ₹15 Lakhs</td>
+                            <td>20%</td>
+                            <td>20%</td>
+                        </tr>
+                        <tr>
+                            <td>Above ₹15 Lakhs</td>
+                            <td>30%</td>
+                            <td>30%</td>
+                        </tr>
+                        <tr style="background: rgba(16, 185, 129, 0.1);">
+                            <td><strong>Cess</strong></td>
+                            <td colspan="2"><strong>4% on tax (if income &gt; ₹1 Cr)</strong></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div id="investments" class="section hidden kinetic-element">
+            <div class="section-title">
+                <div class="section-icon">📊</div>
+                Investment Recommendations - 80C Deductions
+            </div>
+
+            <div id="investmentRecommendations"></div>
+
+            <h3 style="margin-top: 2rem; color: var(--text-dark); margin-bottom: 1rem;">Investment Summary</h3>
+            <div class="results-container">
+                <div class="result-box">
+                    <div class="result-label">Total 80C Limit</div>
+                    <div class="result-value">₹1,50,000</div>
+                </div>
+                <div class="result-box">
+                    <div class="result-label">Amount Invested</div>
+                    <div class="result-value" id="totalInvested">₹0</div>
+                </div>
+                <div class="result-box active">
+                    <div class="result-label">Remaining Available</div>
+                    <div class="result-value" id="remainingInvestment">₹1,50,000</div>
+                </div>
+            </div>
+
+            <button class="btn-primary" onclick="showSection('regime')">View Tax Impact</button>
+        </div>
+
+        <div id="family" class="section hidden kinetic-element">
+            <div class="section-title">
+                <div class="section-icon">👨‍👩‍👧‍👦</div>
+                Family Tax Planning
+            </div>
+
+            <p style="margin-bottom: 1.5rem; color: var(--text-light);">Compare tax liabilities across family members to optimize overall family tax burden</p>
+
+            <div id="familyMembersContainer"></div>
+
+            <button class="btn-primary" onclick="addFamilyMember()">+ Add Family Member</button>
+
+            <h3 style="margin-top: 2rem; color: var(--text-dark); margin-bottom: 1rem;">Family Tax Summary</h3>
+            <div class="summary-stats">
+                <div class="stat-box">
+                    <div class="stat-label">Total Family Income</div>
+                    <div class="stat-value" id="familyTotalIncome">₹0</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-label">Combined Tax Liability</div>
+                    <div class="stat-value" id="familyTotalTax">₹0</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-label">Average Family Tax Rate</div>
+                    <div class="stat-value" id="familyAvgRate">0%</div>
+                </div>
+            </div>
+        </div>
+
+        <div id="tracking" class="section hidden kinetic-element">
+            <div class="section-title">
+                <div class="section-icon">📅</div>
+                Monthly Tax Tracking & Historical Comparison
+            </div>
+
+            <div class="tabs">
+                <button class="tab active" onclick="switchTab('monthlyPayments')">Quarterly Payments</button>
+                <button class="tab" onclick="switchTab('historicalComparison')">Year-on-Year Comparison</button>
+            </div>
+
+            <div id="monthlyPayments" class="tab-content active">
+                <h3 style="color: var(--text-dark); margin-bottom: 1rem;">FY 2024-25 Quarterly Tax Payments</h3>
+                <p style="color: var(--text-light); margin-bottom: 1.5rem;">Estimated quarterly tax payment schedule based on your income and regime selection</p>
+                
+                <div class="form-group">
+                    <label>Select Tax Regime for Quarterly Tracking:</label>
+                    <select id="trackingRegimeSelect" onchange="updateMonthlyTracking()">
+                        <option value="ops">Old Pension Scheme (OPS)</option>
+                        <option value="nps">New Pension Scheme (NPS)</option>
+                    </select>
+                </div>
+
+                <div class="monthly-tracker" id="monthlyTrackerContainer">
+                </div>
+
+                <table class="comparison-table">
+                    <thead>
+                        <tr>
+                            <th>Quarter</th>
+                            <th>Period</th>
+                            <th>Due Date</th>
+                            <th>Tax Amount</th>
+                            <th>Cumulative</th>
+                        </tr>
+                    </thead>
+                    <tbody id="quarterlyTable">
+                    </tbody>
+                </table>
+            </div>
+
+            <div id="historicalComparison" class="tab-content">
+                <h3 style="color: var(--text-dark); margin-bottom: 1rem;">Year-on-Year Comparison</h3>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Select Years to Compare:</label>
+                        <select id="historyYear1" onchange="updateHistoricalComparison()">
+                            <option value="2023">FY 2023-24</option>
+                            <option value="2024" selected>FY 2024-25</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Compare With:</label>
+                        <select id="historyYear2" onchange="updateHistoricalComparison()">
+                            <option value="2023" selected>FY 2023-24</option>
+                            <option value="2024">FY 2024-25</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="results-container">
+                    <div class="result-box">
+                        <div class="result-label">Tax in Previous Year</div>
+                        <div class="result-value" id="prevYearTax">₹0</div>
+                    </div>
+                    <div class="result-box">
+                        <div class="result-label">Tax in Current Year</div>
+                        <div class="result-value" id="currYearTax">₹0</div>
+                    </div>
+                    <div class="result-box active">
+                        <div class="result-label">Year-on-Year Change</div>
+                        <div class="result-value" id="yoyChange">₹0</div>
+                    </div>
+                </div>
+
+                <table class="comparison-table">
+                    <thead>
+                        <tr>
+                            <th>Metric</th>
+                            <th id="histYear1Header">FY 2023-24</th>
+                            <th id="histYear2Header">FY 2024-25</th>
+                            <th>Change</th>
+                        </tr>
+                    </thead>
+                    <tbody id="historicalTable">
+                        <tr>
+                            <td>Total Income</td>
+                            <td id="hist_income_2023">₹0</td>
+                            <td id="hist_income_2024">₹0</td>
+                            <td id="hist_income_change">₹0</td>
+                        </tr>
+                        <tr>
+                            <td>Tax (OPS)</td>
+                            <td id="hist_tax_ops_2023">₹0</td>
+                            <td id="hist_tax_ops_2024">₹0</td>
+                            <td id="hist_tax_ops_change">₹0</td>
+                        </tr>
+                        <tr>
+                            <td>Tax (NPS)</td>
+                            <td id="hist_tax_nps_2023">₹0</td>
+                            <td id="hist_tax_nps_2024">₹0</td>
+                            <td id="hist_tax_nps_change">₹0</td>
+                        </tr>
+                        <tr>
+                            <td>Effective Rate (OPS)</td>
+                            <td id="hist_rate_ops_2023">0%</td>
+                            <td id="hist_rate_ops_2024">0%</td>
+                            <td id="hist_rate_change">0%</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let taxData = {
+            incomeSources: [],
+            investments: {
+                lic: 0,
+                ppf: 0,
+                nps: 0,
+                homePayment: 0,
+                elss: 0,
+                sukanya: 0
+            },
+            familyMembers: [],
+            selectedRegime: 'ops',
+            historicalData: {
+                2023: { income: 0, investments: 0 },
+                2024: { income: 0, investments: 0 }
+            }
+        };
+
+        window.addEventListener('load', function() {
+            loadFromLocalStorage();
+            addIncomeSource();
+            addFamilyMember();
+            initializeInvestments();
+            updateDashboard();
+        });
+
+        function saveToLocalStorage() {
+            localStorage.setItem('taxData', JSON.stringify(taxData));
+        }
+
+        function loadFromLocalStorage() {
+            const saved = localStorage.getItem('taxData');
+            if (saved) {
+                taxData = JSON.parse(saved);
+            }
+        }
+
+        function showSection(sectionId) {
+            const sections = document.querySelectorAll('.section');
+            sections.forEach(section => {
+                section.classList.add('hidden');
+            });
+            document.getElementById(sectionId).classList.remove('hidden');
+
+            const navButtons = document.querySelectorAll('.nav-button');
+            navButtons.forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+
+            window.scrollTo(0, 0);
+        }
+
+        function switchTab(tabId) {
+            const contents = document.querySelectorAll('.tab-content');
+            contents.forEach(content => content.classList.remove('active'));
+            document.getElementById(tabId).classList.add('active');
+
+            const tabs = document.querySelectorAll('.tab');
+            tabs.forEach(tab => tab.classList.remove('active'));
+            event.target.classList.add('active');
+        }
+
+        function addIncomeSource() {
+            const id = Date.now();
+            const source = {
+                id,
+                type: 'salary',
+                amount: 0,
+                description: ''
+            };
+            taxData.incomeSources.push(source);
+            renderIncomeSource(source);
+            saveToLocalStorage();
+        }
+
+        function renderIncomeSource(source) {
+            const container = document.getElementById('incomeSourcesContainer');
+            const html = `
+                <div class="income-source-item" id="income-${source.id}">
+                    <div class="income-item-header">
+                        <div class="income-item-title">${source.type.charAt(0).toUpperCase() + source.type.slice(1)}</div>
+                        <button class="btn-remove" onclick="removeIncomeSource(${source.id})">Remove</button>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Income Type</label>
+                            <select onchange="updateIncomeSource(${source.id}, 'type', this.value)">
+                                <option value="salary" ${source.type === 'salary' ? 'selected' : ''}>Salary</option>
+                                <option value="rental" ${source.type === 'rental' ? 'selected' : ''}>Rental Income</option>
+                                <option value="capitalGains" ${source.type === 'capitalGains' ? 'selected' : ''}>Capital Gains</option>
+                                <option value="freelance" ${source.type === 'freelance' ? 'selected' : ''}>Freelance/Business</option>
+                                <option value="other" ${source.type === 'other' ? 'selected' : ''}>Other</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Annual Amount (₹)</label>
+                            <input type="number" placeholder="Enter amount" value="${source.amount}" onchange="updateIncomeSource(${source.id}, 'amount', parseFloat(this.value) || 0)">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Description</label>
+                        <input type="text" placeholder="Add notes" value="${source.description}" onchange="updateIncomeSource(${source.id}, 'description', this.value)">
+                    </div>
+                </div>
+            `;
+            if (document.getElementById(`income-${source.id}`)) {
+                document.getElementById(`income-${source.id}`).outerHTML = html;
+            } else {
+                container.innerHTML += html;
+            }
+        }
+
+        function updateIncomeSource(id, field, value) {
+            const source = taxData.incomeSources.find(s => s.id === id);
+            if (source) {
+                source[field] = value;
+                renderIncomeSource(source);
+                saveToLocalStorage();
+                updateDashboard();
+            }
+        }
+
+        function removeIncomeSource(id) {
+            taxData.incomeSources = taxData.incomeSources.filter(s => s.id !== id);
+            document.getElementById(`income-${id}`).remove();
+            saveToLocalStorage();
+            updateDashboard();
+        }
+
+        function calculateTax(income, regime = 'ops') {
+            const brackets = {
+                ops: [
+                    { limit: 300000, rate: 0 },
+                    { limit: 600000, rate: 0.05 },
+                    { limit: 900000, rate: 0.10 },
+                    { limit: 1200000, rate: 0.15 },
+                    { limit: 1500000, rate: 0.20 },
+                    { limit: Infinity, rate: 0.30 }
+                ],
+                nps: [
+                    { limit: 300000, rate: 0 },
+                    { limit: 600000, rate: 0.05 },
+                    { limit: 900000, rate: 0.10 },
+                    { limit: 1200000, rate: 0.15 },
+                    { limit: 1500000, rate: 0.20 },
+                    { limit: Infinity, rate: 0.30 }
+                ]
+            };
+
+            let tax = 0;
+            let previousLimit = 0;
+            const rates = brackets[regime];
+
+            for (let bracket of rates) {
+                if (income <= previousLimit) break;
+                
+                const taxableInThisBracket = Math.min(income, bracket.limit) - previousLimit;
+                tax += taxableInThisBracket * bracket.rate;
+                previousLimit = bracket.limit;
+            }
+
+            if (income > 10000000) {
+                tax += tax * 0.04;
+            }
+
+            return Math.round(tax);
+        }
+
+        function getTotalIncome() {
+            return taxData.incomeSources.reduce((sum, source) => sum + source.amount, 0);
+        }
+
+        function getTotalInvestments() {
+            return Object.values(taxData.investments).reduce((sum, val) => sum + val, 0);
+        }
+
+        function getAdjustedIncome(regime = 'ops') {
+            let income = getTotalIncome();
+            
+            if (regime === 'ops') {
+                income = Math.max(0, income - getTotalInvestments());
+            } else if (regime === 'nps') {
+                const standardDeduction = 75000;
+                income = Math.max(0, income - standardDeduction);
+            }
+
+            return income;
+        }
+
+        function initializeInvestments() {
+            const investments = [
+                { key: 'lic', name: 'Life Insurance Premium (LIC)', limit: 150000 },
+                { key: 'ppf', name: 'Public Provident Fund (PPF)', limit: 150000 },
+                { key: 'nps', name: 'National Pension System (NPS)', limit: 150000 },
+                { key: 'homePayment', name: 'Home Loan Principal (80C)', limit: 150000 },
+                { key: 'elss', name: 'ELSS Mutual Funds', limit: 150000 },
+                { key: 'sukanya', name: 'Sukanya Samriddhi Account', limit: 150000 }
+            ];
+
+            const container = document.getElementById('investmentRecommendations');
+            container.innerHTML = investments.map(inv => `
+                <div class="investment-card">
+                    <div class="investment-title">${inv.name}</div>
+                    <div class="investment-limit">Limit: ₹${inv.limit.toLocaleString()}</div>
+                    <input type="number" class="investment-input" placeholder="Amount (₹)" value="${taxData.investments[inv.key]}" onchange="updateInvestment('${inv.key}', parseFloat(this.value) || 0)">
+                </div>
+            `).join('');
+
+            updateInvestmentSummary();
+        }
+
+        function updateInvestment(key, amount) {
+            taxData.investments[key] = Math.min(amount, 150000);
+            saveToLocalStorage();
+            initializeInvestments();
+            updateDashboard();
+        }
+
+        function updateInvestmentSummary() {
+            const total = getTotalInvestments();
+            const remaining = Math.max(0, 150000 - total);
+            document.getElementById('totalInvested').textContent = `₹${total.toLocaleString()}`;
+            document.getElementById('remainingInvestment').textContent = `₹${remaining.toLocaleString()}`;
+        }
+
+        function addFamilyMember() {
+            const id = Date.now();
+            const member = {
+                id,
+                name: `Family Member ${taxData.familyMembers.length + 1}`,
+                income: 0,
+                regime: 'ops',
+                investments: 0
+            };
+            taxData.familyMembers.push(member);
+            renderFamilyMember(member);
+            saveToLocalStorage();
+        }
+
+        function renderFamilyMember(member) {
+            const container = document.getElementById('familyMembersContainer');
+            const tax = calculateTax(Math.max(0, member.income - (member.regime === 'ops' ? member.investments : 75000)), member.regime);
+            const effectiveRate = member.income > 0 ? ((tax / member.income) * 100).toFixed(2) : '0';
+            
+            const html = `
+                <div class="family-member" id="member-${member.id}">
+                    <div class="member-header">
+                        <div class="member-name">${member.name}</div>
+                        <div style="display: flex; gap: 1rem;">
+                            <span class="comparison-badge">Tax: ₹${tax.toLocaleString()}</span>
+                            <button class="btn-remove btn-small" onclick="removeFamilyMember(${member.id})">Remove</button>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Name</label>
+                            <input type="text" value="${member.name}" onchange="updateFamilyMember(${member.id}, 'name', this.value)">
+                        </div>
+                        <div class="form-group">
+                            <label>Annual Income (₹)</label>
+                            <input type="number" value="${member.income}" onchange="updateFamilyMember(${member.id}, 'income', parseFloat(this.value) || 0)">
+                        </div>
+                        <div class="form-group">
+                            <label>Tax Regime</label>
+                            <select onchange="updateFamilyMember(${member.id}, 'regime', this.value)">
+                                <option value="ops" ${member.regime === 'ops' ? 'selected' : ''}>Old Pension (OPS)</option>
+                                <option value="nps" ${member.regime === 'nps' ? 'selected' : ''}>New Pension (NPS)</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>80C Investments (₹)</label>
+                            <input type="number" value="${member.investments}" onchange="updateFamilyMember(${member.id}, 'investments', parseFloat(this.value) || 0)">
+                        </div>
+                    </div>
+                </div>
+            `;
+            
+            const existing = document.getElementById(`member-${member.id}`);
+            if (existing) {
+                existing.outerHTML = html;
+            } else {
+                container.innerHTML += html;
+            }
+        }
+
+        function updateFamilyMember(id, field, value) {
+            const member = taxData.familyMembers.find(m => m.id === id);
+            if (member) {
+                member[field] = value;
+                renderFamilyMember(member);
+                saveToLocalStorage();
+                updateFamilySummary();
+            }
+        }
+
+        function removeFamilyMember(id) {
+            taxData.familyMembers = taxData.familyMembers.filter(m => m.id !== id);
+            document.getElementById(`member-${id}`).remove();
+            saveToLocalStorage();
+            updateFamilySummary();
+        }
+
+        function updateFamilySummary() {
+            const totalIncome = taxData.familyMembers.reduce((sum, m) => sum + m.income, 0);
+            const totalTax = taxData.familyMembers.reduce((sum, m) => {
+                const adjusted = Math.max(0, m.income - (m.regime === 'ops' ? m.investments : 75000));
+                return sum + calculateTax(adjusted, m.regime);
+            }, 0);
+            const avgRate = totalIncome > 0 ? ((totalTax / totalIncome) * 100).toFixed(2) : '0';
+
+            document.getElementById('familyTotalIncome').textContent = `₹${totalIncome.toLocaleString()}`;
+            document.getElementById('familyTotalTax').textContent = `₹${totalTax.toLocaleString()}`;
+            document.getElementById('familyAvgRate').textContent = `${avgRate}%`;
+        }
+
+        function updateDashboard() {
+            const totalIncome = getTotalIncome();
+            const opsAdjusted = getAdjustedIncome('ops');
+            const npsAdjusted = getAdjustedIncome('nps');
+            const opsTax = calculateTax(opsAdjusted, 'ops');
+            const npsTax = calculateTax(npsAdjusted, 'nps');
+            const savings = opsTax - npsTax;
+            const effectiveRate = totalIncome > 0 ? ((opsTax / totalIncome) * 100).toFixed(2) : '0';
+            const investmentsUtilized = getTotalInvestments();
+
+            document.getElementById('totalIncomeDisplay').textContent = `₹${totalIncome.toLocaleString()}`;
+            document.getElementById('opsDisplay').textContent = `₹${opsTax.toLocaleString()}`;
+            document.getElementById('npsDisplay').textContent = `₹${npsTax.toLocaleString()}`;
+            document.getElementById('maxSavingsDisplay').textContent = `₹${Math.max(0, savings).toLocaleString()}`;
+            
+            document.getElementById('annualIncomeCard').textContent = `₹${totalIncome.toLocaleString()}`;
+            document.getElementById('effectiveTaxCard').textContent = `${effectiveRate}%`;
+            document.getElementById('recommendedRegime').textContent = savings > 0 ? 'NPS' : 'OPS';
+            document.getElementById('investmentsUtilized').textContent = `₹${investmentsUtilized.toLocaleString()}`;
+
+            updateRegimeComparison();
+            updateMonthlyTracking();
+            updateFamilySummary();
+            updateInvestmentSummary();
+        }
+
+        function updateRegimeComparison() {
+            const totalIncome = getTotalIncome();
+            const opsTax = calculateTax(getAdjustedIncome('ops'), 'ops');
+            const npsTax = calculateTax(getAdjustedIncome('nps'), 'nps');
+            const savings = opsTax - npsTax;
+
+            document.getElementById('totalTaxOPS').textContent = `₹${opsTax.toLocaleString()}`;
+            document.getElementById('totalTaxNPS').textContent = `₹${npsTax.toLocaleString()}`;
+            document.getElementById('taxSaving').textContent = `₹${Math.abs(savings).toLocaleString()} ${savings >= 0 ? 'Saved' : 'More'}`;
+
+            const brackets = [
+                { label: 'Up to ₹3L', limit: 300000 },
+                { label: '₹3L - ₹6L', limit: 600000 },
+                { label: '₹6L - ₹9L', limit: 900000 },
+                { label: '₹9L - ₹12L', limit: 1200000 },
+                { label: '₹12L - ₹15L', limit: 1500000 },
+                { label: 'Above ₹15L', limit: Infinity }
+            ];
+
+            let tableHtml = '';
+            let prevLimit = 0;
+
+            brackets.forEach((bracket, idx) => {
+                const nextLimit = bracket.limit;
+                const opsRate = [0, 5, 10, 15, 20, 30][idx];
+                const npsRate = [0, 5, 10, 15, 20, 30][idx];
+                
+                let yourOps = 0, yourNps = 0;
+                if (totalIncome > prevLimit) {
+                    const amountInBracket = Math.min(totalIncome, nextLimit) - prevLimit;
+                    yourOps = Math.round(amountInBracket * opsRate / 100);
+                    yourNps = Math.round(amountInBracket * npsRate / 100);
+                }
+
+                tableHtml += `
+                    <tr>
+                        <td><strong>${bracket.label}</strong></td>
+                        <td>${opsRate}%</td>
+                        <td>${npsRate}%</td>
+                        <td>₹${yourOps.toLocaleString()}</td>
+                        <td>₹${yourNps.toLocaleString()}</td>
+                    </tr>
+                `;
+                prevLimit = nextLimit;
+            });
+
+            document.getElementById('regimeTableBody').innerHTML = tableHtml;
+        }
+
+        function updateMonthlyTracking() {
+            const totalIncome = getTotalIncome();
+            const regime = document.getElementById('trackingRegimeSelect')?.value || 'ops';
+            const adjusted = getAdjustedIncome(regime);
+            const annualTax = calculateTax(adjusted, regime);
+            const quarterlyTax = Math.round(annualTax / 4);
+
+            const quarters = [
+                { name: 'Q1', period: 'Jun 15', months: 'Apr-Jun' },
+                { name: 'Q2', period: 'Sep 15', months: 'Jul-Sep' },
+                { name: 'Q3', period: 'Dec 15', months: 'Oct-Dec' },
+                { name: 'Q4', period: 'Mar 15', months: 'Jan-Mar' }
+            ];
+
+            let trackerHtml = '';
+            let tableHtml = '';
+            let cumulative = 0;
+
+            quarters.forEach((quarter, idx) => {
+                cumulative += quarterlyTax;
+                trackerHtml += `
+                    <div class="month-card">
+                        <div class="month-name">${quarter.name}</div>
+                        <div class="month-value">₹${quarterlyTax.toLocaleString()}</div>
+                    </div>
+                `;
+
+                tableHtml += `
+                    <tr>
+                        <td>${quarter.name}</td>
+                        <td>${quarter.months}</td>
+                        <td>${quarter.period}</td>
+                        <td>₹${quarterlyTax.toLocaleString()}</td>
+                        <td>₹${cumulative.toLocaleString()}</td>
+                    </tr>
+                `;
+            });
+
+            const tracker = document.getElementById('monthlyTrackerContainer');
+            const table = document.getElementById('quarterlyTable');
+            if (tracker) tracker.innerHTML = trackerHtml;
+            if (table) table.innerHTML = tableHtml;
+        }
+
+        function updateHistoricalComparison() {
+            const year1 = document.getElementById('historyYear1')?.value || '2023';
+            const year2 = document.getElementById('historyYear2')?.value || '2024';
+
+            const data = {
+                2023: { income: getTotalIncome() * 0.85, investments: getTotalInvestments() * 0.8 },
+                2024: { income: getTotalIncome(), investments: getTotalInvestments() }
+            };
+
+            const income1 = data[year1]?.income || 0;
+            const income2 = data[year2]?.income || 0;
+            const invest1 = data[year1]?.investments || 0;
+            const invest2 = data[year2]?.investments || 0;
+
+            const tax1_ops = calculateTax(Math.max(0, income1 - invest1), 'ops');
+            const tax2_ops = calculateTax(Math.max(0, income2 - invest2), 'ops');
+            const tax1_nps = calculateTax(Math.max(0, income1 - 75000), 'nps');
+            const tax2_nps = calculateTax(Math.max(0, income2 - 75000), 'nps');
+
+            const rate1_ops = income1 > 0 ? ((tax1_ops / income1) * 100).toFixed(2) : '0';
+            const rate2_ops = income2 > 0 ? ((tax2_ops / income2) * 100).toFixed(2) : '0';
+
+            document.getElementById('prevYearTax').textContent = `₹${tax1_ops.toLocaleString()}`;
+            document.getElementById('currYearTax').textContent = `₹${tax2_ops.toLocaleString()}`;
+            document.getElementById('yoyChange').textContent = `₹${(tax2_ops - tax1_ops).toLocaleString()} ${tax2_ops >= tax1_ops ? '↑' : '↓'}`;
+
+            document.getElementById('histYear1Header').textContent = `FY ${year1}-${parseInt(year1)+1}`;
+            document.getElementById('histYear2Header').textContent = `FY ${year2}-${parseInt(year2)+1}`;
+
+            document.getElementById('hist_income_2023').textContent = `₹${income1.toLocaleString()}`;
+            document.getElementById('hist_income_2024').textContent = `₹${income2.toLocaleString()}`;
+            document.getElementById('hist_income_change').textContent = `₹${(income2 - income1).toLocaleString()}`;
+
+            document.getElementById('hist_tax_ops_2023').textContent = `₹${tax1_ops.toLocaleString()}`;
+            document.getElementById('hist_tax_ops_2024').textContent = `₹${tax2_ops.toLocaleString()}`;
+            document.getElementById('hist_tax_ops_change').textContent = `₹${(tax2_ops - tax1_ops).toLocaleString()}`;
+
+            document.getElementById('hist_tax_nps_2023').textContent = `₹${tax1_nps.toLocaleString()}`;
+            document.getElementById('hist_tax_nps_2024').textContent = `₹${tax2_nps.toLocaleString()}`;
+            document.getElementById('hist_tax_nps_change').textContent = `₹${(tax2_nps - tax1_nps).toLocaleString()}`;
+
+            document.getElementById('hist_rate_ops_2023').textContent = `${rate1_ops}%`;
+            document.getElementById('hist_rate_ops_2024').textContent = `${rate2_ops}%`;
+            document.getElementById('hist_rate_change').textContent = `${(parseFloat(rate2_ops) - parseFloat(rate1_ops)).toFixed(2)}%`;
+        }
+
+        function exportJSON() {
+            const dataStr = JSON.stringify(taxData, null, 2);
+            const dataBlob = new Blob([dataStr], { type: 'application/json' });
+            const url = URL.createObjectURL(dataBlob);
+            const link = document.createElement('a');
+            link.href = url;
+            link.download = `taxcortex_backup_${new Date().toISOString().split('T')[0]}.json`;
+            link.click();
+            URL.revokeObjectURL(url);
+        }
+
+        function resetAll() {
+            if (confirm('Are you sure you want to reset all data? This cannot be undone.')) {
+                taxData = {
+                    incomeSources: [],
+                    investments: { lic: 0, ppf: 0, nps: 0, homePayment: 0, elss: 0, sukanya: 0 },
+                    familyMembers: [],
+                    selectedRegime: 'ops',
+                    historicalData: { 2023: { income: 0, investments: 0 }, 2024: { income: 0, investments: 0 } }
+                };
+                localStorage.removeItem('taxData');
+                location.reload();
+            }
+        }
+
+        document.addEventListener('change', (e) => {
+            if (e.target.id === 'trackingRegimeSelect') {
+                updateMonthlyTracking();
+            }
+        });
+    </script>
+</body>
+</html>
