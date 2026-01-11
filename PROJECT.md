@@ -38,3 +38,8 @@ Level 2 DFD - Tax Calculation Process
 
 
 Algorithmic Detail: Level 2 reveals three-stage tax pipeline. Pre-process aggregates 6 income streams and caps 80C deductions at ₹1.5L (old regime). Slab Calculator applies progressive brackets [0% ₹0-3L, 5% ₹3-7L, 10% ₹7-10L, 15% ₹10-12L, 20% ₹12-15L, 30% >₹15L] with 4% cess. Post-process computes effective rates and quarterly splits (15-Jun, 15-Sep, 15-Dec, 15-Mar deadlines).
+
+
+🔧 Component Breakdown
+
+<img width="100%" height="202" alt="Screenshot 2026-01-11 at 2 04 49 PM" src="https://github.com/user-attachments/assets/cd2cd9e5-21d0-4129-9838-1c672f9a0d1d" />
