@@ -1,28 +1,23 @@
-# 🚀 TaxCortex - Full-Stack Indian Income Tax Calculator
+📖 TaxCortex - Complete Technical Documentation & README
+🎯 Project Overview
+TaxCortex is a comprehensive Smart Indian Tax Calculator built for FY 2024-25 compliance, featuring real-time tax regime comparisons (Old vs New Pension Scheme), multiple income source tracking, 80C investment planning, family tax optimization, quarterly payment scheduling, and historical year-on-year analysis. The application combines a production-grade Porsche-inspired UI with accurate Indian tax logic, offline-first PWA capabilities, and full-stack scalability through Flask Python backend integration.
 
-[![Status](https://img.shields.io/badge/status-production%20ready-brightgreen.svg)]()
-[![License](https://img.shields.io/badge/license-MIT-blue.svg)]()
-[![Docker](https://img.shields.io/badge/docker-deploy%205min-blue.svg)]()
-[![Python](https://img.shields.io/badge/python-3.11-green.svg)]()
-[![Flask](https://img.shields.io/badge/flask-2.3-blue.svg)]()
+Key Features:
 
-**AI-powered full-stack income tax calculator** built for **HackTheWinter 2025** with **Flask backend integration**, **offline PWA capability**, **DFD documentation**, and **production Docker deployment**. Handles FY 2024-25 Indian tax slabs, 6×80C investments, family planning, quarterly schedules.
+✅ Multiple income sources (Salary, Rental, Capital Gains, Freelance)
 
-## ✨ Features Overview
+✅ Real-time OPS vs NPS regime comparison with slab-wise breakdown
 
-| **Feature** | **Status** | **Description** |
-|-------------|------------|-----------------|
-| **6 Income Sources** | ✅ Live | Salary, Rental, Capital Gains, Freelance, Business, Other |
-| **6×80C Investments** | ✅ Live | LIC, PPF, NPS, Home Loan, ELSS, Sukanya Samriddhi |
-| **Old/New Regime** | ✅ Live | Real-time OPS vs NPS comparison |
-| **Family Tax Planning** | ✅ Live | Multi-member consolidated returns |
-| **Quarterly Payments** | ✅ Live | June/Sept/Dec/Mar schedules with due dates |
-| **Historical YoY** | ✅ Live | Year-on-year tax comparison |
-| **Offline PWA** | ✅ Live | Service Worker + LocalStorage |
-| **Backend APIs** | ✅ Live | Flask REST with PostgreSQL/Redis |
-| **PDF/JSON Export** | 🔄 Next | ReportLab generation |
-| **Docker Deploy** | ✅ Live | 1-command production |
+✅ 80C investment tracker (LIC, PPF, NPS, ELSS, Home Loan, Sukanya)
 
-## 🏗️ System Architecture (Complete DFD Documentation)
+✅ Family tax planning with individual regime optimization
 
-### **Level 0 DFD - Context Diagram**
+✅ Quarterly tax payment calendar with due dates
+
+✅ Historical comparison across financial years
+
+✅ JSON/PDF export with professional formatting
+
+✅ LocalStorage persistence + backend sync
+
+✅ Light blue theme with smooth kinetics (cubic-bezier animations)
