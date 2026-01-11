@@ -59,12 +59,9 @@ REST API Design: /api/calculate_tax accepts complete financial profile returning
 
 Data Models
 
-class TaxProfile:
-    user_id: str
-    financial_year: str
-    incomes: List[IncomeSource]
-    investments: Dict[str, float]
-    family_members: List[FamilyMember]
-    regime_preference: str
-
 Data Modeling: TaxProfile encapsulates complete user financial state with type hints for IDE support. IncomeSource models 6 income categories with amount, category, proof_document fields. Investments tracks 6×80C categories with category, amount, proof_url. FamilyMember supports consolidated planning with individual optimizations.
+
+⚡ Scalability & Performance
+
+<img width="843" height="398" alt="Screenshot 2026-01-11 at 2 36 12 PM" src="https://github.com/user-attachments/assets/7e11eb9f-f552-4e54-9ec0-616f56dbb374" />
+
