@@ -49,6 +49,7 @@ Frontend Component Architecture: Dashboard provides real-time ₹12,50,000 → �
 
 Backend (Flask Python)
 
-<img width="100%" height="173" alt="Screenshot 2026-01-11 at 2 28 52 PM" src="https://github.com/user-attachments/assets/de8cbdff-875a-4e4d-9193-5c026622ee94" />
+<img width="741" height="175" alt="Screenshot 2026-01-11 at 2 30 58 PM" src="https://github.com/user-attachments/assets/48470f9f-9180-4801-9927-f71fbf243e03" />
+
 
 <img width="844" height="492" alt="Screenshot 2026-01-11 at 2 30 00 PM" src="https://github.com/user-attachments/assets/de3032b1-a46b-4a1d-860c-b83fc4a73466" />
