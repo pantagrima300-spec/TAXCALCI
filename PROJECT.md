@@ -129,4 +129,11 @@ Phase 3: ML & Analytics (Week 5-6)
 
 <img width="737" height="106" alt="Screenshot 2026-01-11 at 3 46 29 PM" src="https://github.com/user-attachments/assets/c8161658-38bd-40b5-b3c7-c3393cf1a98a" />
 
+AI Enhancement: Linear Programming maximizes 80C utilization. Random Forest predicts optimal regime (92% accuracy). Personalized recommendations suggest investment rebalancing.
+
+
+<img width="841" height="464" alt="Screenshot 2026-01-11 at 3 47 37 PM" src="https://github.com/user-attachments/assets/4c657862-f8a5-40fd-ab65-4cf4e848b758" />
+
+Production Topology: Cloudflare CDN + WAF handles DDoS protection. Nginx Load Balancer distributes traffic across Flask containers. Redis Cluster caches 90% of calculations. S3 stores generated PDFs. PostgreSQL Primary with read replicas handles persistence.
+
 
