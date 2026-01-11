@@ -69,7 +69,7 @@ Data Models
 Data Modeling: TaxProfile encapsulates complete user financial state with type hints for IDE support. IncomeSource models 6 income categories with amount, category, proof_document fields. Investments tracks 6×80C categories with category, amount, proof_url. FamilyMember supports consolidated planning with individual optimizations.
 
 
-<img width="743" height="182" alt="Screenshot 2026-01-11 at 2 46 27 PM" src="https://github.com/user-attachments/assets/6d0c301d-1302-494d-ac96-77c1876d4f43" />
+<img width="100%" height="182" alt="Screenshot 2026-01-11 at 2 46 27 PM" src="https://github.com/user-attachments/assets/6d0c301d-1302-494d-ac96-77c1876d4f43" />
 
 
 ⚡ Scalability & Performance
@@ -79,7 +79,7 @@ Data Modeling: TaxProfile encapsulates complete user financial state with type h
 
 Current (V1 - Frontend Only)
 
-<img width="744" height="107" alt="Screenshot 2026-01-11 at 3 21 43 PM" src="https://github.com/user-attachments/assets/3881b1af-8f12-4627-ae2b-751eed76c0e7" />
+<img width="100%" height="107" alt="Screenshot 2026-01-11 at 3 21 43 PM" src="https://github.com/user-attachments/assets/3881b1af-8f12-4627-ae2b-751eed76c0e7" />
 
 Client-Side Performance: V1 achieves sub-50ms calculations through optimized JavaScript with no framework overhead. LocalStorage provides 5MB persistence supporting 3+ financial years. 100% offline capability via Service Worker caching eliminates single points of failure.
 
@@ -87,7 +87,7 @@ Client-Side Performance: V1 achieves sub-50ms calculations through optimized Jav
 Round 2 (Full Backend)
 
 
-<img width="744" height="118" alt="Screenshot 2026-01-11 at 3 32 22 PM" src="https://github.com/user-attachments/assets/f70aea6e-e454-43ca-81f6-1082246d80a9" />
+<img width="100%" height="118" alt="Screenshot 2026-01-11 at 3 32 22 PM" src="https://github.com/user-attachments/assets/f70aea6e-e454-43ca-81f6-1082246d80a9" />
 
 
 Server-Side Scaling: Backend introduces Redis caching (tax_result:{income}:{regime} → 90% cache hit rate). PostgreSQL sharding by financial_year prevents hot partitions. Docker containerization enables zero-downtime deployments. CDN serves static assets globally reducing origin load by 70%.
