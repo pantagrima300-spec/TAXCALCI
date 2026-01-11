@@ -44,23 +44,42 @@ Algorithmic Detail: Level 2 reveals three-stage tax pipeline. Pre-process aggreg
 
 <img width="100%" height="202" alt="Screenshot 2026-01-11 at 2 04 49 PM" src="https://github.com/user-attachments/assets/cd2cd9e5-21d0-4129-9838-1c672f9a0d1d" />
 
+
+
 Frontend Component Architecture: Dashboard provides real-time ₹12,50,000 → ₹1,25,000 visualization with 60fps animations. Income Sources uses dynamic form factory generating 6 specialized input types with live validation. Tax Regime Comparison renders interactive tables showing OPS ₹1,25,000 vs NPS ₹1,35,000 with slab-wise breakdowns. 80C tracker enforces ₹1.5L cap with category-wise allocation. Family Planning supports consolidated returns across spouses/dependents. Quarterly Tracking displays statutory due dates with payment calculators. Historical Comparison charts YoY tax progression.
 
 
 Backend (Flask Python)
 
+
 <img width="100%" height="175" alt="Screenshot 2026-01-11 at 2 30 58 PM" src="https://github.com/user-attachments/assets/48470f9f-9180-4801-9927-f71fbf243e03" />
+
+
 
 REST API Design: /api/calculate_tax accepts complete financial profile returning structured results. /api/compare_regimes runs parallel OPS/NPS calculations. /api/generate_pdf produces CA-ready reports via ReportLab. /api/tax_rates serves FY24-25 slab definitions. /api/save_user_data implements user profile persistence. /api/user_data/:id retrieves historical profiles.
 
+
+
 <img width="100%" height="492" alt="Screenshot 2026-01-11 at 2 30 00 PM" src="https://github.com/user-attachments/assets/de3032b1-a46b-4a1d-860c-b83fc4a73466" />
+
 
 
 Data Models
 
 Data Modeling: TaxProfile encapsulates complete user financial state with type hints for IDE support. IncomeSource models 6 income categories with amount, category, proof_document fields. Investments tracks 6×80C categories with category, amount, proof_url. FamilyMember supports consolidated planning with individual optimizations.
 
+
+<img width="743" height="182" alt="Screenshot 2026-01-11 at 2 46 27 PM" src="https://github.com/user-attachments/assets/6d0c301d-1302-494d-ac96-77c1876d4f43" />
+
+
 ⚡ Scalability & Performance
 
+
 <img width="100%" height="398" alt="Screenshot 2026-01-11 at 2 36 12 PM" src="https://github.com/user-attachments/assets/7e11eb9f-f552-4e54-9ec0-616f56dbb374" />
+
+Current (V1 - Frontend Only)
+
+<img width="744" height="107" alt="Screenshot 2026-01-11 at 3 21 43 PM" src="https://github.com/user-attachments/assets/3881b1af-8f12-4627-ae2b-751eed76c0e7" />
+
+
 
