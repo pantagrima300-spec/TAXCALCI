@@ -45,3 +45,10 @@ Algorithmic Detail: Level 2 reveals three-stage tax pipeline. Pre-process aggreg
 <img width="100%" height="202" alt="Screenshot 2026-01-11 at 2 04 49 PM" src="https://github.com/user-attachments/assets/cd2cd9e5-21d0-4129-9838-1c672f9a0d1d" />
 
 Frontend Component Architecture: Dashboard provides real-time ₹12,50,000 → ₹1,25,000 visualization with 60fps animations. Income Sources uses dynamic form factory generating 6 specialized input types with live validation. Tax Regime Comparison renders interactive tables showing OPS ₹1,25,000 vs NPS ₹1,35,000 with slab-wise breakdowns. 80C tracker enforces ₹1.5L cap with category-wise allocation. Family Planning supports consolidated returns across spouses/dependents. Quarterly Tracking displays statutory due dates with payment calculators. Historical Comparison charts YoY tax progression.
+
+
+Backend (Flask Python)
+
+<img width="100%" height="173" alt="Screenshot 2026-01-11 at 2 28 52 PM" src="https://github.com/user-attachments/assets/de8cbdff-875a-4e4d-9193-5c026622ee94" />
+
+<img width="844" height="492" alt="Screenshot 2026-01-11 at 2 30 00 PM" src="https://github.com/user-attachments/assets/de3032b1-a46b-4a1d-860c-b83fc4a73466" />
