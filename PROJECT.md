@@ -51,11 +51,10 @@ Backend (Flask Python)
 
 <img width="100%" height="175" alt="Screenshot 2026-01-11 at 2 30 58 PM" src="https://github.com/user-attachments/assets/48470f9f-9180-4801-9927-f71fbf243e03" />
 
+REST API Design: /api/calculate_tax accepts complete financial profile returning structured results. /api/compare_regimes runs parallel OPS/NPS calculations. /api/generate_pdf produces CA-ready reports via ReportLab. /api/tax_rates serves FY24-25 slab definitions. /api/save_user_data implements user profile persistence. /api/user_data/:id retrieves historical profiles.
 
 <img width="100%" height="492" alt="Screenshot 2026-01-11 at 2 30 00 PM" src="https://github.com/user-attachments/assets/de3032b1-a46b-4a1d-860c-b83fc4a73466" />
 
-
-REST API Design: /api/calculate_tax accepts complete financial profile returning structured results. /api/compare_regimes runs parallel OPS/NPS calculations. /api/generate_pdf produces CA-ready reports via ReportLab. /api/tax_rates serves FY24-25 slab definitions. /api/save_user_data implements user profile persistence. /api/user_data/:id retrieves historical profiles.
 
 Data Models
 
