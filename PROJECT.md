@@ -56,3 +56,15 @@ Backend (Flask Python)
 
 
 REST API Design: /api/calculate_tax accepts complete financial profile returning structured results. /api/compare_regimes runs parallel OPS/NPS calculations. /api/generate_pdf produces CA-ready reports via ReportLab. /api/tax_rates serves FY24-25 slab definitions. /api/save_user_data implements user profile persistence. /api/user_data/:id retrieves historical profiles.
+
+Data Models
+
+class TaxProfile:
+    user_id: str
+    financial_year: str
+    incomes: List[IncomeSource]
+    investments: Dict[str, float]
+    family_members: List[FamilyMember]
+    regime_preference: str
+
+Data Modeling: TaxProfile encapsulates complete user financial state with type hints for IDE support. IncomeSource models 6 income categories with amount, category, proof_document fields. Investments tracks 6×80C categories with category, amount, proof_url. FamilyMember supports consolidated planning with individual optimizations.
