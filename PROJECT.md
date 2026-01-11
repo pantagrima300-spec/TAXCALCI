@@ -20,4 +20,4 @@ Three-Tier Architecture Explanation: TaxCortex implements a classic three-tier a
 Level 0 DFD - Context Diagram
 
 
-![WhatsApp Image 2026-01-11 at 1 38 07 PM](https://github.com/user-attachments/assets/a27d2d9a-a970-4c4c-be3d-b14791d7b454)
+<img width="844" height="475" alt="![WhatsApp Image 2026-01-11 at 1 38 07 PM](https://github.com/user-attachments/assets/a27d2d9a-a970-4c4c-be3d-b14791d7b454)" />
